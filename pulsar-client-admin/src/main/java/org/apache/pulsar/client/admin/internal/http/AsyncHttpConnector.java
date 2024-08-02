@@ -103,11 +103,11 @@ public class AsyncHttpConnector implements Connector {
         DefaultAsyncHttpClientConfig.Builder confBuilder = new DefaultAsyncHttpClientConfig.Builder();
         confBuilder.setUseProxyProperties(true);
         confBuilder.setFollowRedirect(true);
-        confBuilder.setRequestTimeout(conf.getRequestTimeoutMs());
-        confBuilder.setConnectTimeout(connectTimeoutMs);
-        confBuilder.setReadTimeout(readTimeoutMs);
+        confBuilder.setRequestTimeout(Duration.ofMillis(conf.getRequestTimeoutMs()));
+        confBuilder.setConnectTimeout(Duration.ofMillis(connectTimeoutMs));
+        confBuilder.setReadTimeout(Duration.ofMillis(readTimeoutMs));
         confBuilder.setUserAgent(String.format("Pulsar-Java-v%s", PulsarVersion.getVersion()));
-        confBuilder.setRequestTimeout(requestTimeoutMs);
+        confBuilder.setRequestTimeout(Duration.ofMillis(requestTimeoutMs));
         confBuilder.setIoThreadsCount(conf.getNumIoThreads());
         confBuilder.setKeepAliveStrategy(new DefaultKeepAliveStrategy() {
             @Override

@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.time.Duration;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.ExecutionException;
@@ -55,8 +56,8 @@ public class TokenClient implements ClientCredentialsExchanger {
             DefaultAsyncHttpClientConfig.Builder confBuilder = new DefaultAsyncHttpClientConfig.Builder();
             confBuilder.setUseProxyProperties(true);
             confBuilder.setFollowRedirect(true);
-            confBuilder.setConnectTimeout(DEFAULT_CONNECT_TIMEOUT_IN_SECONDS * 1000);
-            confBuilder.setReadTimeout(DEFAULT_READ_TIMEOUT_IN_SECONDS * 1000);
+            confBuilder.setConnectTimeout(Duration.ofMillis(DEFAULT_CONNECT_TIMEOUT_IN_SECONDS * 1000));
+            confBuilder.setReadTimeout(Duration.ofMillis(DEFAULT_READ_TIMEOUT_IN_SECONDS * 1000));
             confBuilder.setUserAgent(String.format("Pulsar-Java-v%s", PulsarVersion.getVersion()));
             AsyncHttpClientConfig config = confBuilder.build();
             this.httpClient = new DefaultAsyncHttpClient(config);

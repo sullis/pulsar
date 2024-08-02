@@ -47,6 +47,7 @@ import java.net.SocketAddress;
 import java.security.PublicKey;
 import java.security.interfaces.ECPublicKey;
 import java.security.interfaces.RSAPublicKey;
+import java.time.Duration;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -175,8 +176,8 @@ public class AuthenticationProviderOpenID implements AuthenticationProvider {
                     .build();
         }
         AsyncHttpClientConfig clientConfig = new DefaultAsyncHttpClientConfig.Builder()
-                .setConnectTimeout(connectionTimeout)
-                .setReadTimeout(readTimeout)
+                .setConnectTimeout(Duration.ofMillis(connectionTimeout))
+                .setReadTimeout(Duration.ofMillis(readTimeout))
                 .setSslContext(sslContext)
                 .build();
         httpClient = new DefaultAsyncHttpClient(clientConfig);

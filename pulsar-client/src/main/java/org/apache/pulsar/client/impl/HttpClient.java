@@ -30,6 +30,7 @@ import java.net.InetSocketAddress;
 import java.net.URI;
 import java.net.URL;
 import java.security.GeneralSecurityException;
+import java.time.Duration;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -76,8 +77,8 @@ public class HttpClient implements Closeable {
         confBuilder.setUseProxyProperties(true);
         confBuilder.setFollowRedirect(true);
         confBuilder.setMaxRedirects(conf.getMaxLookupRedirects());
-        confBuilder.setConnectTimeout(DEFAULT_CONNECT_TIMEOUT_IN_SECONDS * 1000);
-        confBuilder.setReadTimeout(DEFAULT_READ_TIMEOUT_IN_SECONDS * 1000);
+        confBuilder.setConnectTimeout(Duration.ofMillis(DEFAULT_CONNECT_TIMEOUT_IN_SECONDS * 1000));
+        confBuilder.setReadTimeout(Duration.ofMillis(DEFAULT_READ_TIMEOUT_IN_SECONDS * 1000));
         confBuilder.setUserAgent(String.format("Pulsar-Java-v%s", PulsarVersion.getVersion()));
         confBuilder.setKeepAliveStrategy(new DefaultKeepAliveStrategy() {
             @Override
